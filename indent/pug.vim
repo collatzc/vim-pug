@@ -1,19 +1,15 @@
 " Vim indent file
 " Language: Pug
-" Maintainer: Joshua Borton
-" Credits: Tim Pope (vim-pug)
-" Last Change: 2010 Sep 22
 
 if exists("b:did_indent")
   finish
 endif
 
-unlet! b:did_indent
 let b:did_indent = 1
 
 setlocal autoindent
 setlocal indentexpr=GetPugIndent()
-setlocal indentkeys=o,O,*<Return>,},],0),!^F
+setlocal indentkeys=o,O,},],0),!^F
 
 " Only define the function once.
 if exists("*GetPugIndent")
@@ -55,7 +51,7 @@ function! GetPugIndent()
   elseif line =~ '^\%(if\|else\|unless\|for\|each\|block\|mixin\|append\|case\|when\)'
     return increase
   elseif line =~ '^'.s:tag.'[&!]\=[=~-].*,\s*$'
-    return increase
+    return indent
   elseif line == '-#'
     return increase
   elseif line =~? '^\v%('.g:pug_self_closing_tags.')>'
